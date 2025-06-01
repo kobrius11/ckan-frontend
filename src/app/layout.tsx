@@ -1,5 +1,7 @@
 import "@/app/styles/globals.css";
 import { geistMono, geistSans } from "@/app/fonts";
+import { ThemeProvider } from "@/components/theme/theme-provider"
+import SiteHeader from "@/components/header/site-header";
 
 
 
@@ -9,11 +11,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+
+        <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <SiteHeader />
+            {children}
+          </ThemeProvider>
       </body>
     </html>
   );
