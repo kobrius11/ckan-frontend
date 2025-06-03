@@ -5,8 +5,8 @@ import PackageList from "@/components/home/package-list";
 export default async function Home() {
   return (
     <Main>
-      <PackageSearch />
-      <PackageList />
+      {/* <PackageSearch />
+      <PackageList /> */}
     </Main>
   );
 }
