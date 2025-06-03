@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import "@/app/styles/globals.css";
 import { geistMono, geistSans } from "@/app/fonts";
 import { ThemeProvider } from "@/components/theme/theme-provider"
