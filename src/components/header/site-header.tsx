@@ -27,7 +27,7 @@ export default async function SiteHeader() {
           <HeaderContent className="flex items-center justify-center">
             <HeaderItem>
               <Button variant="link">
-                <Link href="/datasets">Datasets</Link>
+                <Link href="/dataset">Datasets</Link>
               </Button>
             </HeaderItem>
             <HeaderItem>

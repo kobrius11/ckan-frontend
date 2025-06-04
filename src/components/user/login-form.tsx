@@ -3,6 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { useRouter } from 'next/navigation';
 
 import { Button } from "@/components/ui/button";
 import {
@@ -27,6 +28,8 @@ const formSchema = z.object({
 });
 
 export function LoginForm() {
+  const router = useRouter();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -39,6 +42,7 @@ export function LoginForm() {
     await CKAN.userLogin(values);
     console.log("it hits")
     console.log(sessionStorage.getItem("ckan-user"));
+    router.push("/")
   }
 
   return (

@@ -40,7 +40,7 @@ class CkanApiClient {
       success: boolean;
       result: LoginResult;
     } = await response.json();
-    
+
     const token = responseData.result["frontend_token"];
     if (token) {
       sessionStorage.setItem("ckan-user", token);
@@ -88,6 +88,43 @@ class CkanApiClient {
 
   public async getOrganizationList() {
     const response = await fetch(`${this.DMS}/api/3/action/organization_list`);
+    const responseData = await response.json();
+    const organizations: Array<string> = responseData.result;
+    return organizations;
+  }
+
+  public async packageCreate({
+    title,
+    description,
+    tags,
+    license,
+    organization,
+    visibility,
+  }: {
+    title: string,
+    description?: string | undefined
+    tags?: string | undefined
+    license?: string | undefined
+    organization: string
+    visibility: string
+  }) {
+    const apiKey = sessionStorage.getItem("ckan-user");
+    const response = await fetch(`${this.DMS}/api/3/action/package_create`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        ...(apiKey ? { Authorization: apiKey } : {}),
+      },
+      body: JSON.stringify({
+        "title": title,
+        "name": title,
+        "description": description,
+        // "tags": tags,
+        // "licence": license,
+        "owner_org": organization,
+        "visibility": visibility,
+      }),
+    });
     const responseData = await response.json();
     const organizations: Array<string> = responseData.result;
     return organizations;
